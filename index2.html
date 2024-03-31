@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turismo en Catamayo</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600&display=swap" rel="stylesheet">
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Variables
+      var header = document.querySelector('header');
+      var nav = document.querySelector('#nav-float');
+      var headerHeight = header.offsetHeight;
+      var loader = document.getElementById('loader');
+      var logo = document.querySelector('.logo');
+
+      // Carga de animación del loader
+      var loaderAnimation = bodymovin.loadAnimation({
+        container: document.getElementById('loader-animation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'img/2523-loading.json'
+      });
+
+      // Ocultar loader después de 3 segundos
+      setTimeout(function () {
+        loader.classList.add('hidden');
+      }, 3000);
+
+      // Ajustar posición del nav
+      function adjustNavPosition() {
+        var scrollY = window.scrollY || window.pageYOffset;
+        var isHeaderVisible = scrollY < headerHeight;
+
+        if (isHeaderVisible) {
+          headerHeight = header.offsetHeight;
+
+          setTimeout(function () {
+            if (scrollY < headerHeight) {
+              nav.classList.remove('sticky');
+              nav.style.marginTop = headerHeight - scrollY + 'px';
+              logo.style.display = 'none';
+            }
+          }, 5);
+        } else {
+          nav.classList.add('sticky');
+          nav.style.marginTop = '0';
+          logo.style.display = 'block';
+        }
+      }
+
+      // Ajustar posición del nav al cargar la página
+      window.addEventListener('load', function () {
+        adjustNavPosition();
+      });
+
+      // Ajustar posición del nav al cambiar el tamaño de la ventana
+      window.addEventListener('resize', function () {
+        adjustNavPosition();
+      });
+
+      // Ajustar posición del nav al hacer scroll después de la carga de la página
+      window.addEventListener('scroll', function () {
+        adjustNavPosition();
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var slides = document.querySelectorAll('.slide');
+      var currentSlide = 0;
+
+      function showSlide(slideIndex) {
+        if (slideIndex >= slides.length) {
+          slideIndex = 0;
+        } else if (slideIndex < 0) {
+          slideIndex = slides.length - 1;
+        }
+
+        slides.forEach(function (slide) {
+          slide.classList.remove('active');
+        });
+
+        slides[slideIndex].classList.add('active');
+        currentSlide = slideIndex;
+      }
+
+      setInterval(function () {
+        showSlide(currentSlide + 1);
+      }, 3000);
+    });
+  </script>
+</head>
+
+<body>
+  <div id="loader">
+    <div id="loader-animation"></div>
+  </div>
+
+  <!-- Encabezado -->
+  <header>
+    <img src="img/CATAMAYO.png" alt="CATAMAYO">
+  </header>
+
+  <!-- Navegación -->
+  <nav id="nav-float">
+    <img src="img/CATAMAYO.png" alt="Logo" class="logo">
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#lugares">Lugares</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <form>
+      <div class="search-container">
+        <span class="icon"><i class="uil uil-search"></i></span>
+        <input type="text" id="buscador" placeholder="Buscar" />
+      </div>
+    </form>
+  </nav>
+
+  <!-- Contenido -->
+
+  <!-- Sección Inicio -->
+  <section id="inicio">
+    <div class="background-slider">
+      <div class="slide active"></div>
+      <div class="slide"></div>
+      <div class="slide"></div>
+    </div>
+    <div class="text-container">
+      <h2>Descubre la belleza de Catamayo</h2>
+      <p>Explora sus paisajes impresionantes, disfruta de su rica cultura y sumérgete en la hospitalidad de su gente.
+        ¡Ven y vive una experiencia inolvidable en Catamayo!</p>
+    </div>
+  </section>
+
+  <!-- Sección Lugares de interés -->
+  <section id="lugares">
+    <div class="barra-lugares">
+      <h2>Lugares de interés</h2>
+      <ul>
+        <li class="lugar" data-nombre="Mirador de Catamayo"
+          data-descripcion="El Mirador de Catamayo ofrece una vista panorámica impresionante de la ciudad y sus alrededores. Disfruta de la belleza natural y captura momentos inolvidables en este lugar emblemático."
+          data-como-llegar="Desde el Parque Central de Catamayo, puedes tomar un taxi o caminar aproximadamente 2 km hacia el oeste para llegar al Mirador de Catamayo."
+          data-imagen="img/miravalle.jpg"
+          data-enlace="https://www.google.com/maps/dir/Parque+Central+Catamayo/Mirador+Catamayo">
+          Mirador de Catamayo</li>
+        <li class="lugar" data-nombre="Parque Central"
+          data-descripcion="El Parque Central es el corazón de la ciudad, rodeado de hermosos jardines y con una arquitectura encantadora. Aquí puedes relajarte, disfrutar de la atmósfera tranquila y conocer la cultura local."
+          data-imagen="img/parque-central-panoramica.jpg"
+          data-enlace="https://www.google.com/maps/dir/Parque+Central+Catamayo/Parque+Central+Catamayo"
+          data-como-llegar="El Parque Central de Catamayo se encuentra en el centro de la ciudad, por lo que es fácilmente accesible a pie desde cualquier lugar cercano.">
+          Parque Central</li>
+        <li class="lugar" data-nombre="Museo Arqueológico"
+          data-descripcion="El Museo Arqueológico de Catamayo alberga una colección de artefactos históricos y exhibiciones que muestran la rica historia y cultura de la región. Explora las antiguas civilizaciones que habitaron esta tierra."
+          data-imagen="img/museo.jpg"
+          data-enlace="https://www.google.com/maps/dir/Parque+Central+Catamayo/Museo+Arqueologico+Catamayo"
+          data-como-llegar="El Museo Arqueológico de Catamayo se encuentra a poca distancia a pie del Parque Central, en el centro de la ciudad.">
+          Museo Arqueológico</li>
+        <li class="lugar" data-nombre="Reserva Ecológica El Tiro"
+          data-descripcion="La Reserva Ecológica El Tiro es un paraíso natural con una gran diversidad de flora y fauna. Disfruta de caminatas, observación de aves y conecta con la naturaleza en este hermoso entorno."
+          data-imagen="img/reserva.webp"
+          data-enlace="https://www.google.com/maps/dir/Parque+Central+Catamayo/Reserva+Ecológica+El+Tiro"
+          data-como-llegar="Desde el Parque Central de Catamayo, puedes tomar un taxi o transporte público hacia la Reserva Ecológica El Tiro. El trayecto dura aproximadamente 30 minutos.">
+          Reserva Ecológica El Tiro</li>
+      </ul>
+    </div>
+
+    <div class="lugar-info">
+      <div class="lugar-imagen">
+        <img id="img-lugar" src="img/miravalle.jpg" alt="Mirador de Catamayo">
+      </div>
+      <div class="lugar-detalle">
+        <h3 id="lugar-nombre">Mirador de Catamayo</h3>
+        <p id="lugar-descripcion">El Mirador de Catamayo ofrece una vista panorámica impresionante de la ciudad y sus
+          alrededores. Disfruta de la belleza natural y captura momentos inolvidables en este lugar emblemático.</p>
+        <h2>Como llegar?</h2>
+        <p id="lugar-como-llegar">Desde el Parque Central de Catamayo, puedes tomar un taxi o caminar aproximadamente 2
+          km hacia el oeste para llegar al Mirador de Catamayo.</p>
+        <a id="lugar-enlace" href="#" target="_blank">Abrir Mapa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Galería -->
+  <section id="galeria">
+    <div class="barra-galeria">
+      <div class="barra-lugares">
+        <h2>Galería</h2>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mySlides">
+        <div class="numbertext">1 / 6</div>
+        <img src="img/aguamania-inicio.jpg" style="width: 100%">
+      </div>
+
+      <div class="mySlides">
+        <div class="numbertext">2 / 6</div>
+        <img src="img/la-cruz-panoramica.jpg" style="width:100%">
+      </div>
+
+      <div class="mySlides">
+        <div class="numbertext">3 / 6</div>
+        <img src="img/Parque-Central-scaled.jpg" style="width:100%">
+      </div>
+
+      <div class="mySlides">
+        <div class="numbertext">4 / 6</div>
+        <img src="img/museo.jpg" style="width:100%">
+      </div>
+
+      <div class="mySlides">
+        <div class="numbertext">5 / 6</div>
+        <img src="img/bugabillas.jpeg" style="width:100%">
+      </div>
+
+      <div class="mySlides">
+        <div class="numbertext">6 / 6</div>
+        <img src="img/guayabal.jpg" style="width:100%">
+      </div>
+
+      <a class="prev" onclick="plusSlides(-1)">❮</a>
+      <a class="next" onclick="plusSlides(1)">❯</a>
+
+      <div class="caption-container">
+        <p id="caption"></p>
+      </div>
+
+      <div class="row">
+        <div class="column">
+          <img class="demo cursor" src="img/aguamania-inicio.jpg" style="width:100%" onclick="currentSlide(1)"
+            alt="Aguamania">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="img/la-cruz-panoramica.jpg" style="width:100%" onclick="currentSlide(2)"
+            alt="Parque la Cruz">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="img/Parque-Central-scaled.jpg" style="width:100%" onclick="currentSlide(3)"
+            alt="Parque Central">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="img/museo.jpg" style="width:100%" onclick="currentSlide(4)" alt="Museo">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="img/bugabillas.jpeg" style="width:100%" onclick="currentSlide(5)"
+            alt="Bugambillas">
+        </div>
+        <div class="column">
+          <img class="demo cursor" src="img/guayabal.jpg" style="width:100%" onclick="currentSlide(6)" alt="Guayabal">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Contacto -->
+  <section id="contacto" class="contacto">
+    <h2>Contacto</h2>
+    <p>Para obtener más información sobre el turismo en Catamayo, puedes ponerte en contacto con nosotros:</p>
+    <p>Email: info@catamayoturismo.com</p>
+    <p>Teléfono: +1 234 567 890</p>
+    <form name="contactanos">
+      Nombre: <input type="text" name="Nombre"><br>
+      Correo: <input type="email" name="Correo"><br>
+      Pregunta: <input type="text" name="Pregunta"><br>
+      <input type="submit">
+    </form>
+  
+  
+  </section>
+
+  <!-- Pie de página -->
+  <footer>
+    <p>Derechos de autor &copy; 2023 Turismo en Catamayo</p>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var lugarItems = document.querySelectorAll('.lugar');
+      var lugarNombre = document.getElementById('lugar-nombre');
+      var lugarDescripcion = document.getElementById('lugar-descripcion');
+      var lugarComoLlegar = document.getElementById('lugar-como-llegar');
+      var lugarEnlace = document.getElementById('lugar-enlace');
+      var lugarImg = document.getElementById('img-lugar');
+
+      function mostrarLugar(index) {
+        var lugarSeleccionado = lugarItems[index];
+
+        var nombre = lugarSeleccionado.getAttribute('data-nombre');
+        var descripcion = lugarSeleccionado.getAttribute('data-descripcion');
+        var comoLlegar = lugarSeleccionado.getAttribute('data-como-llegar');
+        var enlace = lugarSeleccionado.getAttribute('data-enlace');
+        var imagen = lugarSeleccionado.getAttribute('data-imagen')
+
+
+        lugarNombre.textContent = nombre;
+        lugarDescripcion.textContent = descripcion;
+        lugarComoLlegar.textContent = comoLlegar;
+        lugarEnlace.href = enlace;
+        lugarImg.src = imagen;
+      }
+
+      lugarItems.forEach(function (item, index) {
+        item.addEventListener('click', function () {
+          mostrarLugar(index);
+        });
+        item.addEventListener('mouseover', function () {
+          mostrarLugar(index);
+        });
+      });
+    });
+  </script>
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("demo");
+      let captionText = document.getElementById("caption");
+      if (n > slides.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = slides.length }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+      captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+  </script>
+</body>
+
+</html>
